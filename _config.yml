@@ -3,7 +3,7 @@
 title: Eric Otten
 logo: /images/Eric-Otten-Logo.png
 description: Digital marketing secrets to grow your business.
-hero-image: '/images/Eric-Otten-Speaking.jpg'
+hero-image: '/images/Eric-Otten-Banner.jpg'
 baseurl: "" # The subpath of your site, e.g. /blog
 url: "" # The base hostname & protocol for your site, e.g. http://example.com
 
@@ -19,7 +19,7 @@ author:
   twitter:  https://twitter.com/theericotten
   facebook: https://facebook.com/"
   website:  http://clifford.netlify.app
-  cover:    /images/Eric-Otten-Speaking.jpg
+  cover:    /images/Eric-Otten-Banner.jpg
 
 
 #-------------------------------
