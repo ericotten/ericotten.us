@@ -1,0 +1,46 @@
+---
+layout: page
+title: Extract Email Addresses from Microsoft Word (DOCX) Files
+permalink: /tools/extract-emails-from-docx
+---
+
+<p>Upload one or more Microsoft Word (.docx) files to extract email addresses. Perfect for email outreach.</p>
+
+<div style="margin-bottom: 20px;">
+    <input type="file" id="docxFiles" multiple accept=".docx">
+</div>
+<button id="extractEmailsBtn" class="button button--primary">Extract email addresses</button>
+<div id="emailsOutput" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+
+<p id="emailCount">0 emails extracted.</p>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<!--
+<form action="YOUR_MAILCHIMP_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="margin-bottom: 25px;">
+    <div id="mc_embed_signup_scroll">
+        <h2>Subscribe to our mailing list</h2>
+        <div class="mc-field-group">
+            <label for="mce-FNAME">First Name </label>
+            <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+        </div>
+        <div class="mc-field-group">
+            <label for="mce-EMAIL">Email Address </label>
+            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        </div>
+        <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_XXXXXX_XXXXXX" tabindex="-1" value="">
+        </div>
+        <div class="clear">
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button button--primary">
+        </div>
+    </div>
+</form>
+-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.7.0/mammoth.browser.min.js"></script>
+<script src="extract-emails.js"></script>

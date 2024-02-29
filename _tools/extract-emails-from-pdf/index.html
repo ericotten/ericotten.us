@@ -1,0 +1,20 @@
+---
+layout: page
+title: Extract Email Addresses from PDF Files
+permalink: /tools/extract-emails-from-pdf
+---
+
+<p>Upload one or more PDF files to extract email addresses. Perfect for email outreach.</p>
+
+<div style="margin-bottom: 20px;">
+    <input type="file" id="pdfFiles" multiple accept="application/pdf">
+</div>
+<button id="extractEmailsBtn" class="button button--primary">Extract email addresses</button>
+<div id="emailsOutput" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+
+<p id="emailCount">0 emails extracted.</p>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+<script src="extract-emails.js"></script>

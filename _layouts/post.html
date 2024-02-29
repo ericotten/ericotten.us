@@ -59,19 +59,17 @@ layout: default
           {{ content }}
         </div>
 
-        {% include post-share.html %}
         {% include post-navigation.html %}
 
       </article>
-      <!-- end post -->
-      {% include disqus-comments.html %}
     </div>
+
+
     <div class="col col-4 col-d-12">
       {% include sidebar-widgets/widget-author.html %}
-      {% include sidebar-widgets/widget-featured-posts.html %}
-      {% include sidebar-widgets/widget-tags.html %}
     </div>
   </div>
 </div>
 
+{% include social-media.html %}
 {% include related-posts.html %}

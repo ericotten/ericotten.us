@@ -1,8 +1,8 @@
 #-------------------------------
 # General Site Settings
 title: Eric Otten
-logo: /images/Eric-Otten-Logo.png
-description: Digital marketing secrets to grow your business.
+logo: /images/EricOtten-us-Logo.png
+description: Master Your Life, Mindset, and Business.
 hero-image: '/images/Eric-Otten-Banner.jpg'
 baseurl: "" # The subpath of your site, e.g. /blog
 url: "" # The base hostname & protocol for your site, e.g. http://example.com
@@ -85,6 +85,11 @@ defaults:
       path: '_pages'
     values:
       permalink: /:basename:output_ext
+
+collections:
+  tools:
+    output: true
+    permalink: /tools/:path/
 
 include:
   - _pages
