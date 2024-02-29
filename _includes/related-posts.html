@@ -1,0 +1,95 @@
+{% assign maxRelated = 3 %}
+{% assign minCommonTags =  1 %}
+{% assign maxRelatedCounter = 0 %}
+
+{% for post in site.posts %}
+  {% assign sameTagCount = 0 %}
+  {% assign commonTags = '' %}
+  {% for tag in post.tags %}
+    {% if post.url != page.url %}
+      {% if page.tags contains tag %}
+        {% assign sameTagCount = sameTagCount | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if sameTagCount >= minCommonTags %}
+    {% assign class = 'is-related' %}
+  {% endif %}
+{% endfor %}
+
+<div class="container">
+  <div class="related-posts section {{class}}">
+    <div class="section-top">
+      <h5 class="section-title">You may also like</h5>
+    </div>
+    <div class="row grid">
+    {% for post in site.posts %}
+
+      {% assign sameTagCount = 0 %}
+      {% assign commonTags = '' %}
+
+      {% for tag in post.tags %}
+        {% if post.url != page.url %}
+          {% if page.tags contains tag %}
+            {% assign sameTagCount = sameTagCount | plus: 1 %}
+            {% capture tagmarkup %} <span class="label label-default">{{ tag }}</span> {% endcapture %}
+            {% assign commonTags = commonTags | append: tagmarkup %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if sameTagCount >= minCommonTags %}
+
+        <div class="article col col-4 col-d-6 col-t-12 grid__post">
+          {% if post.image %}
+          <a class="article__image" href="{{post.url | prepend: site.baseurl}}">
+            {% if post.featured %}
+            <span class="featured-post"><i class="ion ion-ios-star-outline"></i></span>
+            {% endif %}
+            <img class="fadein" src="{{site.baseurl}}{{post.image}}" alt="{{post.title}}">
+          </a>
+          {% endif %}
+        
+          <div class="article__content">
+            <div class="article-tags">
+              <span class="article__date"><time
+                  datetime="{{ post.date | date_to_xmlschema }}">{% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}{{ post.date | date: date_format }}</time></span>
+              {% if post.tags.size >= 1 %}
+              <div class="article-tags__box">
+                {% for tag in post.tags %}
+                <a href="{{ site.baseurl }}/tag/{{ tag }}" class="article__tag">{{ tag }}</a>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+            <h2 class="article__title">
+              <a href="{{ post.url | prepend: site.baseurl }}">{{post.title}}</a>
+            </h2>
+            <div class="article__meta">
+              <div class="article__author">
+                {% for author in site.data.authors %}
+                {% if author[1].username == post.author %}
+                {% if author[1].avatar %}
+                <a href="{{ site.baseurl }}author/{{ post.author }}/" class="article__author-image"
+                  style="background-image: url({{site.baseurl}}{{author[1].avatar}});"
+                  aria-label="{{author[1].name}}'s Picture"></a>
+                {% endif %}
+                <div class="article__author-footer">
+                  <a href="{{ site.baseurl }}author/{{ post.author }}/" class="article__author-link">{{author[1].name}}</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+        {% if maxRelatedCounter >= maxRelated %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>

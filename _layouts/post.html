@@ -1,0 +1,77 @@
+---
+layout: default
+---
+
+<!-- begin hero -->
+<div class="container">
+  <div class="row">
+    <div class="col col-12">
+      <div class="hero section">
+        {% include hero-navigation.html %}
+        <div class="hero__inner">
+          {% if page.image %}
+          <div class="page-top">
+            <div class="page-image-box">
+              <img class="page-image" src="{{site.baseurl}}{{page.image}}" alt="{{page.title}}">
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end hero -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-8 col-d-12">
+      <!-- begin post -->
+      <article class="post section">
+
+        <div class="post-head">
+          <div class="post__meta">
+            <span class="post__date">
+              <time datetime="{{ page.date | date_to_xmlschema }}">{{page.date | date: '%b %d, %Y'}}</time>
+            </span>
+            {% if page.tags.size >= 1 %}
+            <div class="post-tags">
+              {% for tag in page.tags %}
+              <a href="{{ site.baseurl }}/tag/{{ tag }}" class="post-tags__tag">{{ tag }}</a>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <h1 class="post-title">{{ page.title | escape }}</h1>
+
+          <div class="post__author">
+            {% if site.author.avatar %}
+            <a href="{{ site.baseurl }}/author/{{ page.author }}" class="article__author-image"
+              style="background-image: url({{site.baseurl}}{{site.author.avatar}});" aria-label="{{site.author.name}}'s Picture"></a>
+            {% endif %}
+            <div class="post__author-footer">
+              <a href="{{site.baseurl}}/author/{{ page.author }}" class="article__author-link">{{site.author.name}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="post__content">
+          {{ content }}
+        </div>
+
+        {% include post-share.html %}
+        {% include post-navigation.html %}
+
+      </article>
+      <!-- end post -->
+      {% include disqus-comments.html %}
+    </div>
+    <div class="col col-4 col-d-12">
+      {% include sidebar-widgets/widget-author.html %}
+      {% include sidebar-widgets/widget-featured-posts.html %}
+      {% include sidebar-widgets/widget-tags.html %}
+    </div>
+  </div>
+</div>
+
+{% include related-posts.html %}
