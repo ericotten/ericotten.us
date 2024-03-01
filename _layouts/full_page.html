@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body class="is-in">
+
+{% include header.html %}
+
+<div class="container">
+  <div class="row">
+    <div class="col col-12 col-d-12">
+      <!-- begin page -->
+      <article class="page section">
+        <div class="page-head">
+          <h1 class="page-title">{{ page.title | escape }}</h1>
+        </div>
+        <div class="page__content">
+          {{ content }}
+        </div>
+      </article>
+      <!-- end page -->
+    </div>
+  </div>
+</div>
+</body>
+</html>

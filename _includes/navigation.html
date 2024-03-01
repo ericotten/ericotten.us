@@ -3,10 +3,10 @@
     <a href="{{ site.baseurl }}/" class="nav__link">Home</a>
   </li>
   {% for page in site.pages %}
-    {% unless page.name == 'tags.html' or page.name == '404.html' or page.url contains 'author' or page.url contains 'tag' %}
+    {% unless page.name == 'tags.html' or page.name == '404.html' or page.url contains 'author' or page.url contains 'tag' or page.navigation_exclude %}
       {% if page.title %}
       <li class="nav__item">
-        <a href="{{ page.url | prepend: site.baseurl }}" class="nav__link">{{ page.title }}</a>
+        <a href="{{ page.url | prepend: site.baseurl }}" class="nav__link">{{ page.short_title | default: page.title }}</a>
       </li>
       {% endif %}
     {% endunless %}
