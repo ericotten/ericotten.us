@@ -1,0 +1,18 @@
+---
+layout: page
+title: Eric Otten's Tools for Businesses
+short_title: Tools
+permalink: /tools/
+---
+
+<p>Gain a competitive advantage over your competition with these automation tools.</p>
+
+{% for tool in site.tools %}
+  <a href="{{ tool.url }}" target="_blank" style="text-decoration: none; color: inherit;">
+    <div style="width: 100%; margin: 10px; padding: 20px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.1); cursor: pointer;">
+      <h2>{{ tool.title }}</h2>
+      <p>{{ tool.description }}</p>
+    </div>
+  </a>
+{% endfor %}
+
