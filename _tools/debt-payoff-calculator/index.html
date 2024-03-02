@@ -1,0 +1,58 @@
+---
+layout: page
+title: Debt Payoff Calculator
+description: Strategize your debt payoff to save on interest and time. Perfect for managing personal finances efficiently
+permalink: /tools/debt-payoff-planner
+---
+
+<p>{{ page.description }}</p>
+
+<div id="debtPayoffPlanner">
+    <label for="totalDebt">Total Debt ($):</label>
+    <input type="number" id="totalDebt" required value="10000">
+    <br>
+
+    <label for="averageInterestRate">Average Interest Rate (%):</label>
+    <input type="number" id="averageInterestRate" step="0.01" required value="5">
+    <br>
+
+    <label for="monthlyPayment">Monthly Payment ($):</label>
+    <input type="number" id="monthlyPayment" required value="200">
+    <br>
+
+    <button class="button button--primary" onclick="calculatePayoffTime()" style="margin: 20px 0 20px 0;">Calculate Payoff Time</button>
+
+    <p id="payoffResult"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Debt Payoff Calculation</h2>
+    <p>To estimate the time required to pay off your debt, we use the formula for calculating the number of payments for an installment loan, adjusted for the average interest rate across all debts. The formula is:</p>
+    <p><strong>n = log[(PMT / PMT - (PV * r))] / log[1 + r]</strong></p>
+    <ul>
+        <li><strong>n</strong> is the number of payments.</li>
+        <li><strong>PMT</strong> is the monthly payment amount.</li>
+        <li><strong>PV</strong> is the present value or total amount of the debt.</li>
+        <li><strong>r</strong> is the monthly interest rate (annual rate divided by 12).</li>
+    </ul>
+    <p>This calculation assumes fixed monthly payments and a fixed interest rate, providing a simplified view of your debt payoff timeline.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculatePayoffTime() {
+    var totalDebt = document.getElementById('totalDebt').value;
+    var averageInterestRate = document.getElementById('averageInterestRate').value / 100 / 12;
+    var monthlyPayment = document.getElementById('monthlyPayment').value;
+
+    if (monthlyPayment <= (totalDebt * averageInterestRate)) {
+        document.getElementById('payoffResult').innerHTML = 'Your monthly payment is too low to cover the interest. Please increase your monthly payment.';
+        return;
+    }
+
+    var n = Math.log(monthlyPayment / (monthlyPayment - (totalDebt * averageInterestRate))) / Math.log(1 + averageInterestRate);
+    
+    document.getElementById('payoffResult').innerHTML = 'Number of payments to payoff: ' + Math.ceil(n) + ' (approx ' + Math.ceil(n / 12) + ' years)';
+}
+</script>

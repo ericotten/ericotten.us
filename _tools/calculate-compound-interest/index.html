@@ -1,0 +1,61 @@
+---
+layout: page
+title: Calculate Compound Interest
+description: Calculate your investment's future value with compound interest. Perfect for growing your savings.
+permalink: /tools/calculate-compound-interest
+---
+
+<p>{{ page.description }}</p>
+
+<div id="compoundInterestCalculator">
+    <label for="principal">Principal Amount ($):</label>
+    <input type="number" id="principal" value="100.00">
+    <br>
+    
+    <label for="interestRate">Annual Interest Rate (%):</label>
+    <input type="number" id="interestRate" value="3.00">
+    <br>
+    
+    <label for="timesCompounded">Times Compounded Per Year:</label>
+    <input type="number" id="timesCompounded" value="12">
+    <br>
+    
+    <label for="years">Years:</label>
+    <input type="number" id="years" value="30">
+    <br>
+    
+    <button onclick="calculateCompoundInterest()" class="button button--primary" style="margin: 20px 0 20px 0;">Calculate</button>
+    
+    <p id="result"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Compound Interest Formula</h2>
+    <p>The formula for calculating compound interest is:</p>
+    <p><strong>A = P(1 + r/n)<sup>nt</sup></strong></p>
+    <ul>
+        <li><strong>A</strong> is the amount of money accumulated after <strong>n</strong> years, including interest.</li>
+        <li><strong>P</strong> is the principal amount (the initial amount of money).</li>
+        <li><strong>r</strong> is the annual interest rate (in decimal form).</li>
+        <li><strong>n</strong> is the number of times that interest is compounded per year.</li>
+        <li><strong>t</strong> is the time the money is invested for in years.</li>
+    </ul>
+    <p>Compound interest is calculated by multiplying the initial principal amount by one plus the annual interest rate raised to the power of the number of compound periods minus one. The total initial amount of the loan is then added to the resulting value, leading to the accumulation of interest upon interest, which is the key to its growth.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculateCompoundInterest() {
+    var principal = document.getElementById("principal").value;
+    var interestRate = document.getElementById("interestRate").value / 100;
+    var timesCompounded = document.getElementById("timesCompounded").value;
+    var years = document.getElementById("years").value;
+    
+    var compoundInterest = principal * Math.pow((1 + interestRate / timesCompounded), timesCompounded * years);
+    var result = "Future Value: $" + compoundInterest.toFixed(2);
+    
+    document.getElementById("result").innerText = result;
+}
+calculateCompoundInterest();
+</script>

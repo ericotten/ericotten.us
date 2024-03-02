@@ -1,0 +1,64 @@
+---
+layout: page
+title: Credit Card Balance Transfer Calculator
+description: Find out how much you could save on interest by transferring your credit card balance. Perfect for reducing debt costs
+permalink: /tools/credit-card-balance-transfer-calculator
+---
+
+<p>{{ page.description }}</p>
+
+<div id="balanceTransferCalculator">
+    <label for="currentBalance">Current Balance ($):</label>
+    <input type="number" id="currentBalance" required value="5000">
+    <br>
+
+    <label for="currentInterestRate">Current APR (%):</label>
+    <input type="number" id="currentInterestRate" step="0.01" required value="19.99">
+    <br>
+
+    <label for="newInterestRate">New APR (%):</label>
+    <input type="number" id="newInterestRate" step="0.01" required value="0">
+    <br>
+
+    <label for="balanceTransferFee">Balance Transfer Fee (%):</label>
+    <input type="number" id="balanceTransferFee" step="0.01" required value="3">
+    <br>
+
+    <label for="monthlyPayment">Monthly Payment ($):</label>
+    <input type="number" id="monthlyPayment" required value="200">
+    <br>
+
+    <button class="button button--primary" onclick="calculateSavings()" style="margin: 20px 0 20px 0;">Calculate Savings</button>
+
+    <p id="savingsResult"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Balance Transfer Savings Calculation</h2>
+    <p>To determine your savings, we calculate the total interest you would pay on your current balance with your current APR and compare it to the total interest and fees with the new APR, including any balance transfer fee. The formula to calculate interest for each scenario is based on the average daily balance method, adjusting for the different APRs.</p>
+    <p>Your savings are the difference between the two total amounts paid. This calculation assumes fixed monthly payments until the balance is paid off.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculateSavings() {
+    var currentBalance = document.getElementById('currentBalance').value;
+    var currentInterestRate = document.getElementById('currentInterestRate').value / 100;
+    var newInterestRate = document.getElementById('newInterestRate').value / 100;
+    var balanceTransferFee = document.getElementById('balanceTransferFee').value / 100;
+    var monthlyPayment = document.getElementById('monthlyPayment').value;
+
+    var transferFeeCost = currentBalance * balanceTransferFee;
+    var newBalance = parseFloat(currentBalance) + transferFeeCost;
+
+    var monthsToPayOff = Math.ceil(currentBalance / monthlyPayment);
+    var currentTotalInterest = (currentBalance * currentInterestRate / 12) * monthsToPayOff;
+    
+    var newTotalInterest = (newBalance * newInterestRate / 12) * monthsToPayOff;
+    var savings = currentTotalInterest - (newTotalInterest + transferFeeCost);
+
+    document.getElementById('savingsResult').innerHTML = 'Your estimated savings: $' + savings.toFixed(2) + '<br>' + 
+        'This includes the balance transfer fee of $' + transferFeeCost.toFixed(2) + ' and assumes you keep the same monthly payment.';
+}
+</script>

@@ -1,0 +1,54 @@
+---
+layout: page
+title: Mortgage Payment Calculator
+description: Estimate your monthly mortgage payments. Perfect for home buyers and real estate planning
+permalink: /tools/mortgage-calculator
+---
+
+<p>{{ page.description }}</p>
+
+<div id="mortgageCalculator">
+    <label for="loanAmount">Loan Amount ($):</label>
+    <input type="number" id="loanAmount" required value="500000">
+    <br>
+
+    <label for="interestRate">Annual Interest Rate (%):</label>
+    <input type="number" id="interestRate" step="0.01" required value="6.929">
+    <br>
+
+    <label for="loanTerm">Loan Term (Years):</label>
+    <input type="number" id="loanTerm" required value="30">
+    <br>
+
+    <button class="button button--primary" onclick="calculateMortgage()" style="margin: 20px 0 20px 0;">Calculate</button>
+
+    <p id="monthlyPaymentResult"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Mortgage Payment Formula</h2>
+    <p>The formula for calculating your monthly mortgage payment is:</p>
+    <p><strong>M = P[r(1+r)^n] / [(1+r)^n - 1]</strong></p>
+    <ul>
+        <li><strong>M</strong> is your total monthly mortgage payment.</li>
+        <li><strong>P</strong> is the principal loan amount.</li>
+        <li><strong>r</strong> is your monthly interest rate. This is your annual interest rate divided by 12.</li>
+        <li><strong>n</strong> is your number of payments (the number of months you will be paying the loan).</li>
+    </ul>
+    <p>This formula is used to calculate the fixed monthly payment required to fully pay off a mortgage over a term of years, taking into account the interest rate.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculateMortgage() {
+    var loanAmount = document.getElementById('loanAmount').value;
+    var interestRate = document.getElementById('interestRate').value / 100 / 12;
+    var loanTerm = document.getElementById('loanTerm').value * 12;
+
+    var monthlyPayment = loanAmount * interestRate * Math.pow((1 + interestRate), loanTerm) / (Math.pow((1 + interestRate), loanTerm) - 1);
+
+    document.getElementById('monthlyPaymentResult').innerHTML = 'Your Monthly Payment: $' + monthlyPayment.toFixed(2);
+}
+calculateMortgage();
+</script>

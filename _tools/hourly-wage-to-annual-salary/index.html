@@ -1,0 +1,48 @@
+---
+layout: page
+title: Convert Hourly Wage to Annual Salary
+description: Discover the annual equivalent of your hourly wage. Perfect for financial planning and salary discussions
+permalink: /tools/hourly-wage-to-annual-salary
+---
+
+<p>{{ page.description }}</p>
+
+<div id="wageConverter">
+    <label for="hourlyWage">Hourly Wage ($):</label>
+    <input type="number" id="hourlyWage" required value="65">
+    <br>
+
+    <label for="hoursPerWeek">Hours per Week:</label>
+    <input type="number" id="hoursPerWeek" required value="40">
+    <br>
+
+    <label for="weeksPerYear">Weeks Worked per Year:</label>
+    <input type="number" id="weeksPerYear" required value="50">
+    <br>
+
+    <button class="button button--primary" onclick="calculateAnnualSalary()" style="margin: 20px 0 20px 0;">Calculate Annual Salary</button>
+
+    <p id="annualSalaryResult"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Annual Salary Calculation</h2>
+    <p>To convert your hourly wage to an annual salary, we use the formula:</p>
+    <p><strong>Annual Salary = Hourly Wage × Hours per Week × Weeks Worked per Year</strong></p>
+    <p>This calculation assumes a constant work schedule and does not account for overtime, bonuses, or other forms of compensation.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculateAnnualSalary() {
+    var hourlyWage = document.getElementById('hourlyWage').value;
+    var hoursPerWeek = document.getElementById('hoursPerWeek').value;
+    var weeksPerYear = document.getElementById('weeksPerYear').value;
+
+    var annualSalary = hourlyWage * hoursPerWeek * weeksPerYear;
+    var formattedSalary = annualSalary.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    document.getElementById('annualSalaryResult').innerHTML = 'Your Annual Salary: $' + formattedSalary;
+}
+</script>

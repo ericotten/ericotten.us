@@ -1,0 +1,66 @@
+---
+layout: page
+title: Mortgage Refinance Savings Calculator
+description: Estimate your savings with a mortgage refinance. Perfect for homeowners considering refinancing
+permalink: /tools/mortgage-refinance-calculator
+---
+
+<p>{{ page.description }}</p>
+
+<div id="refinanceCalculator">
+    <label for="currentLoanAmount">Current Loan Amount ($):</label>
+    <input type="number" id="currentLoanAmount" required value="300000">
+    <br>
+
+    <label for="currentInterestRate">Current Interest Rate (%):</label>
+    <input type="number" id="currentInterestRate" step="0.01" required value="4.5">
+    <br>
+
+    <label for="currentLoanTerm">Current Loan Term (Years):</label>
+    <input type="number" id="currentLoanTerm" required value="30">
+    <br>
+
+    <label for="newInterestRate">New Interest Rate (%):</label>
+    <input type="number" id="newInterestRate" step="0.01" required value="3.5">
+    <br>
+
+    <label for="newLoanTerm">New Loan Term (Years):</label>
+    <input type="number" id="newLoanTerm" required value="30">
+    <br>
+
+    <button class="button button--primary" onclick="calculateRefinance()" style="margin: 20px 0 20px 0;">Calculate Savings</button>
+
+    <p id="savingsResult"></p>
+</div>
+
+<div id="formulaExplanation">
+    <h2>Refinance Savings Formula</h2>
+    <p>To estimate your savings from refinancing, we calculate the difference between your current monthly payment and the potential new monthly payment. The formula for each monthly payment is:</p>
+    <p><strong>M = P[r(1+r)^n] / [(1+r)^n - 1]</strong></p>
+    <ul>
+        <li><strong>M</strong> is the total monthly mortgage payment.</li>
+        <li><strong>P</strong> is the principal loan amount.</li>
+        <li><strong>r</strong> is the monthly interest rate (annual interest rate divided by 12).</li>
+        <li><strong>n</strong> is the number of payments (loan term in years multiplied by 12).</li>
+    </ul>
+    <p>We then subtract the new potential payment from your current payment to find your monthly savings. <b>>Note, this does not account for refinancing costs, which should be considered in your overall savings analysis.</b></p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function calculateRefinance() {
+    var currentLoanAmount = document.getElementById('currentLoanAmount').value;
+    var currentInterestRate = document.getElementById('currentInterestRate').value / 100 / 12;
+    var currentLoanTerm = document.getElementById('currentLoanTerm').value * 12;
+    var newInterestRate = document.getElementById('newInterestRate').value / 100 / 12;
+    var newLoanTerm = document.getElementById('newLoanTerm').value * 12;
+
+    var currentMonthlyPayment = (currentLoanAmount * currentInterestRate * Math.pow((1 + currentInterestRate), currentLoanTerm)) / (Math.pow((1 + currentInterestRate), currentLoanTerm) - 1);
+    var newMonthlyPayment = (currentLoanAmount * newInterestRate * Math.pow((1 + newInterestRate), newLoanTerm)) / (Math.pow((1 + newInterestRate), newLoanTerm) - 1);
+
+    var monthlySavings = currentMonthlyPayment - newMonthlyPayment;
+
+    document.getElementById('savingsResult').innerHTML = 'Your Monthly Savings: $' + monthlySavings.toFixed(2);
+}
+</script>
