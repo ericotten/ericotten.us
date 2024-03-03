@@ -1,0 +1,67 @@
+---
+layout: page
+title: Remove Duplicate Emails
+description: Clean your email lists by removing duplicates. Perfect for email marketing and list management
+permalink: /tools/remove-duplicate-emails
+---
+
+<p>{{ page.description }}</p>
+
+<div id="emailCleaner">
+    <label for="emailSet1">First Email List (one email per line):</label>
+    <textarea id="emailSet1" rows="10" cols="50" required></textarea>
+    <br>
+
+    <label for="emailSet2">Second Email List (one email per line):</label>
+    <textarea id="emailSet2" rows="10" cols="50" required></textarea>
+    <br>
+
+    <button class="button button--primary" onclick="removeDuplicates()" style="margin: 20px 0 20px 0;">Remove Duplicates</button>
+
+    <h2>Cleaned Email List</h2>
+    <div id="emailsOutput" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+</div>
+
+<div id="formulaExplanation">
+    <h2>How It Works</h2>
+    <p>This tool combines two sets of emails, removes any duplicates, and provides you with a clean list of unique emails. It's particularly useful for merging and cleaning email lists without requiring manual deduplication.</p>
+</div>
+
+<p>Want to request a feature? Write an email to <a href="mailto:ericottennews@gmail.com">ericottennews@gmail.com</a>. Unsolicited offers will not be tolerated.</p>
+
+<script>
+function removeDuplicates() {
+    // Splitting textarea content by actual newline character
+    var emailSet1 = document.getElementById('emailSet1').value.split('\n').map(email => email.trim());
+    var emailSet2 = document.getElementById('emailSet2').value.split('\n').map(email => email.trim());
+
+    // Combine both sets while removing duplicates and filtering out empty strings
+    var combinedSet = [...new Set([...emailSet1, ...emailSet2])].filter(email => email !== '');
+
+    // Clearing previous results
+    var outputDiv = document.getElementById('emailsOutput');
+    outputDiv.innerHTML = '';
+
+    // Dynamically creating and appending <p> elements for each unique email
+    combinedSet.forEach(email => {
+        var div = document.createElement('div');
+        div.textContent = email;
+        outputDiv.appendChild(div);
+    });
+}
+
+document.getElementById('emailsOutput').onclick = function() {
+    // Check if the user's browser supports the selection API
+    if (document.body.createTextRange) {
+      const range = document.body.createTextRange();
+      range.moveToElementText(this);
+      range.select();
+    } else if (window.getSelection) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(this);
+      selection.removeAllRanges(); // Clear any existing selections
+      selection.addRange(range);
+    }
+  };
+</script>
